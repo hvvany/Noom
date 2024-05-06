@@ -10,4 +10,10 @@ app.use("/public", express.static(__dirname + "/public"));
 app.get("/", (req, res) => res.render("home"));
 app.get("/*", (req, res) => res.redirect("/"));
 const handleListen = () => console.log(`Listening on http://localhost:3000`);
-app.listen(3000, handleListen);
+// app.listen(3000, handleListen);
+
+// server를 만들어서 wsserver에 넣는 이유는 http와 ws방식 모두 같은 서버, 같은 포트 사용하기 위해서이다.
+const server = http.createServer(app);
+const wss = new WebSocket.Server({ server });
+
+server.listen(3000, handleListen);
