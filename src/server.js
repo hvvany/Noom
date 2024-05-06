@@ -18,6 +18,10 @@ const wss = new WebSocket.Server({ server });
 
 wss.on("connection", (socket) => {
   console.log("Connected to Browser");
+  socket.on("close", () => console.log("Disconnted from the Browser"));
+  socket.on("message",(message)=>{
+    console.log(message.toString('utf-8'))
+  })
   socket.send("hello");
 });
 
