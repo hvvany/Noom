@@ -1,4 +1,9 @@
 # Noom
 
 Zoom Clone using NodeJS, WebRTC and Websockets.
-socket io.
+
+# 1.Chat with Websockets
+
+# 2.SocketIO
+
+# 3.Video Call
