@@ -15,10 +15,10 @@ const httpServer = http.createServer(app);
 const wsServer = SocketIO(httpServer);
 
 wsServer.on("connection", (socket) => {
-  socket.on("enter_room", (msg, done) => {
-    console.log(msg);
+  socket.on("enter_room", (roomname, done) => {
+    console.log(roomname);
     setTimeout(() => {
-      done();
+      done(); // 백엔드에서 실행되는 것이 아닌 프론트에 함수가 실행 됨
     }, 10000);
   });
 });
