@@ -23,6 +23,15 @@ wsServer.on("connection", (socket) => {
     done(); // 백엔드에서 실행되는 것이 아닌 프론트에 함수가 실행 됨
     socket.to(roomName).emit("welcome");
   });
+  socket.on("disconnecting", () => {
+    socket.rooms.forEach((room) => {
+      socket.to(room).emit("bye");
+    });
+  });
+  socket.on("new_message", (msg, room, done) => {
+    socket.to(room).emit("new_message", msg);
+    done();
+  });
 });
 
 // const wss = new WebSocket.Server({ server });
