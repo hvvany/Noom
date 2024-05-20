@@ -18,12 +18,10 @@ wsServer.on("connection", (socket) => {
   socket.onAny((event) => {
     console.log(`Socket Event:${event}`);
   });
-  socket.on("enter_room", (roomname, done) => {
-    console.log(socket.id);
-    console.log(socket.rooms);
-    socket.join(roomname);
-    console.log(socket.rooms);
+  socket.on("enter_room", (roomName, done) => {
+    socket.join(roomName);
     done(); // 백엔드에서 실행되는 것이 아닌 프론트에 함수가 실행 됨
+    socket.to(roomName).emit("welcome");
   });
 });
 
