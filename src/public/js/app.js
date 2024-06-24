@@ -24,7 +24,7 @@ async function getCameras() {
       const option = document.createElement("option");
       option.value = camera.deviceId;
       option.innerText = camera.label;
-      if (currentCamera.label == camera.label) {
+      if (currentCamera.label === camera.label) {
         option.selected = true;
       }
       cameraSelect.appendChild(option);
