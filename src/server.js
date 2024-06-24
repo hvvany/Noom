@@ -1,6 +1,9 @@
 import express from "express";
 import http from "http";
-import SocketIO from "socket.io";
+import { Server } from "socket.io";
+import { fileURLToPath } from "url"; // 👈 추가
+
+const __dirname = fileURLToPath(new URL(".", import.meta.url));
 const app = express();
 app.set("view engine", "pug");
 app.set("views", __dirname + "/views");
@@ -9,7 +12,7 @@ app.get("/", (req, res) => res.render("home"));
 app.get("/*", (req, res) => res.redirect("/"));
 // server를 만들어서 wsserver에 넣는 이유는 http와 ws방식 모두 같은 서버, 같은 포트 사용하기 위해서이다.
 const httpServer = http.createServer(app);
-const wsServer = SocketIO(httpServer);
+const wsServer = new Server(httpServer);
 
 wsServer.on("connection", (socket) => {
   socket.on("join_room", (roomName) => {
